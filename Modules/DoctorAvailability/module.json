@@ -1,0 +1,11 @@
+{
+    "name": "DoctorAvailability",
+    "alias": "doctoravailability",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\DoctorAvailability\\Providers\\DoctorAvailabilityServiceProvider"
+    ],
+    "files": []
+}

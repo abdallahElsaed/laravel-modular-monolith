@@ -1,0 +1,11 @@
+{
+    "name": "AppointmentConfirmation",
+    "alias": "appointmentconfirmation",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\AppointmentConfirmation\\Providers\\AppointmentConfirmationServiceProvider"
+    ],
+    "files": []
+}
