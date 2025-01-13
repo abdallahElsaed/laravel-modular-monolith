@@ -14,6 +14,6 @@ use Modules\AppointmentBooking\Http\Controllers\AppointmentBookingController;
  *
 */
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('appointmentbooking', AppointmentBookingController::class)->names('appointmentbooking');
-});
+// Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
+//     Route::apiResource('appointmentbooking', AppointmentBookingController::class)->names('appointmentbooking');
+// });

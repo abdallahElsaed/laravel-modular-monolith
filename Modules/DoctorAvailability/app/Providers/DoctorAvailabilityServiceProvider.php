@@ -2,11 +2,13 @@
 
 namespace Modules\DoctorAvailability\Providers;
 
+use RecursiveIteratorIterator;
+use RecursiveDirectoryIterator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
+use Modules\DoctorAvailability\Domain\Contracts\DoctorRepositoryInterface;
+use Modules\DoctorAvailability\Infrastructure\Repositories\DoctorRepository;
 
 class DoctorAvailabilityServiceProvider extends ServiceProvider
 {
@@ -36,6 +38,12 @@ class DoctorAvailabilityServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+
+        // bind the DoctorRepositoryInterface to the DoctorRepository
+        $this->app->bind(
+            DoctorRepositoryInterface::class,
+            DoctorRepository::class
+        );
     }
 
     /**

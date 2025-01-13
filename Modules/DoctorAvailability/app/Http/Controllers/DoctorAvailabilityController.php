@@ -2,64 +2,28 @@
 
 namespace Modules\DoctorAvailability\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Modules\DoctorAvailability\App\Domain\Services\DoctorService;
+use Modules\DoctorAvailability\Http\Requests\ShowDoctorSlotsRequest;
 
 class DoctorAvailabilityController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @var DoctorService
      */
-    public function index()
-    {
-        return view('doctoravailability::index');
-    }
+    private DoctorService $doctorService;
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function __construct(DoctorService $doctorService)
     {
-        return view('doctoravailability::create');
+        $this->doctorService = $doctorService;
     }
-
     /**
-     * Store a newly created resource in storage.
+     * Display a listing of Doctor's slot.
      */
-    public function store(Request $request)
+    public function showSlots(ShowDoctorSlotsRequest $request)
     {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     */
-    public function show($id)
-    {
-        return view('doctoravailability::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        return view('doctoravailability::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
-    {
-        //
+        // dd($request->validated());
+        return $this->doctorService->showSlots($request->validated());
     }
 }

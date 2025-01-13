@@ -14,6 +14,6 @@ use Modules\DoctorAppointmentManagement\Http\Controllers\DoctorAppointmentManage
  *
 */
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('doctorappointmentmanagement', DoctorAppointmentManagementController::class)->names('doctorappointmentmanagement');
-});
+// Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
+//     Route::apiResource('doctorappointmentmanagement', DoctorAppointmentManagementController::class)->names('doctorappointmentmanagement');
+// });

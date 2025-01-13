@@ -14,6 +14,6 @@ use Modules\DoctorAvailability\Http\Controllers\DoctorAvailabilityController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('doctoravailability', DoctorAvailabilityController::class)->names('doctoravailability');
-});
+// Route::group([], function () {
+//     Route::resource('doctoravailability', DoctorAvailabilityController::class)->names('doctoravailability');
+// });

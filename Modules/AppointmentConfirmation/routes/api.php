@@ -14,6 +14,6 @@ use Modules\AppointmentConfirmation\Http\Controllers\AppointmentConfirmationCont
  *
 */
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('appointmentconfirmation', AppointmentConfirmationController::class)->names('appointmentconfirmation');
-});
+// Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
+//     Route::apiResource('appointmentconfirmation', AppointmentConfirmationController::class)->names('appointmentconfirmation');
+// });

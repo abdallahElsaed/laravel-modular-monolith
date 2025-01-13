@@ -14,6 +14,6 @@ use Modules\AppointmentBooking\Http\Controllers\AppointmentBookingController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('appointmentbooking', AppointmentBookingController::class)->names('appointmentbooking');
-});
+// Route::group([], function () {
+//     Route::resource('appointmentbooking', AppointmentBookingController::class)->names('appointmentbooking');
+// });

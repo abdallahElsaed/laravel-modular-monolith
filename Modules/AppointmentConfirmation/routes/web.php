@@ -14,6 +14,6 @@ use Modules\AppointmentConfirmation\Http\Controllers\AppointmentConfirmationCont
 |
 */
 
-Route::group([], function () {
-    Route::resource('appointmentconfirmation', AppointmentConfirmationController::class)->names('appointmentconfirmation');
-});
+// Route::group([], function () {
+//     Route::resource('appointmentconfirmation', AppointmentConfirmationController::class)->names('appointmentconfirmation');
+// });

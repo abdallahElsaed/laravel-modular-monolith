@@ -14,10 +14,17 @@ use Modules\DoctorAvailability\Http\Controllers\DoctorAvailabilityController;
  *
  */
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('doctoravailability', DoctorAvailabilityController::class)->names('doctoravailability');
-});
+// Route::middleware(['auth:sanctum'])->prefix('v1')->group(
+//     function () {
+//         Route::apiResource('doctoravailability', DoctorAvailabilityController::class)->names('doctoravailability');
+//     }
+// );
 
-Route::get('/doctor-availability', function () {
-    return "hello, world!";
-});
+
+Route::group(
+    [
+        'prefix' => 'doctor-availability',
+    ], function () {
+        Route::get('show-slots', [DoctorAvailabilityController::class, 'showSlots']);
+    }
+);

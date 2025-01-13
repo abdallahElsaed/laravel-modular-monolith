@@ -14,6 +14,6 @@ use Modules\DoctorAppointmentManagement\Http\Controllers\DoctorAppointmentManage
 |
 */
 
-Route::group([], function () {
-    Route::resource('doctorappointmentmanagement', DoctorAppointmentManagementController::class)->names('doctorappointmentmanagement');
-});
+// Route::group([], function () {
+//     Route::resource('doctorappointmentmanagement', DoctorAppointmentManagementController::class)->names('doctorappointmentmanagement');
+// });
