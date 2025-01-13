@@ -15,6 +15,7 @@ class Slot extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
+        'id',
         'doctor_id',
         'time',
         'is_reserved',

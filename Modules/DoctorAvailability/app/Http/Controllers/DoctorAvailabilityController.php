@@ -5,6 +5,7 @@ namespace Modules\DoctorAvailability\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\DoctorAvailability\App\Domain\Services\DoctorService;
+use Modules\DoctorAvailability\Http\Requests\AddDoctorSlotsRequest;
 use Modules\DoctorAvailability\Http\Requests\ShowDoctorSlotsRequest;
 
 class DoctorAvailabilityController extends Controller
@@ -25,5 +26,9 @@ class DoctorAvailabilityController extends Controller
     {
         // dd($request->validated());
         return $this->doctorService->showSlots($request->validated());
+    }
+    public function addSlot(AddDoctorSlotsRequest $request)
+    {
+        return $this->doctorService->addSlot($request->validated());
     }
 }

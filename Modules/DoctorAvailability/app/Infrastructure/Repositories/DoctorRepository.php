@@ -13,7 +13,7 @@ use Modules\DoctorAvailability\Domain\Contracts\DoctorRepositoryInterface;
 class DoctorRepository implements DoctorRepositoryInterface
 {
     /**
-     * @param DoctorEntity $slot
+     * @param string $doctor_id
      */
     public function findDoctor(string $doctor_id): DoctorEntity
     {
@@ -24,6 +24,16 @@ class DoctorRepository implements DoctorRepositoryInterface
         }
 
         return new DoctorEntity($doctor->id, $doctor->name);
+    }
+       /**
+     * @param string $doctor_id
+     */
+    public function doctorIsExist(string $doctor_id): void
+    {
+        $doctor = Doctor::where('id', $doctor_id)->exists();
+        if (!$doctor) {
+            throw new \InvalidArgumentException("Doctor not found");
+        }
     }
     /**
      * @return SlotEntity[]
@@ -49,7 +59,15 @@ class DoctorRepository implements DoctorRepositoryInterface
      */
     public function addSlot(SlotEntity $slot): void
     {
-
+        Slot::create(
+            [
+            'id' => $slot->getId(),
+            'doctor_id' => $slot->getDoctorId(),
+            'time' => $slot->getTime(),
+            'is_reserved' => $slot->isReserved(),
+            'cost' => $slot->getCost()
+            ]
+        );
     }
 
 }

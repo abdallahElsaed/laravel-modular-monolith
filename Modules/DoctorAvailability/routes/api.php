@@ -26,5 +26,6 @@ Route::group(
         'prefix' => 'doctor-availability',
     ], function () {
         Route::get('show-slots', [DoctorAvailabilityController::class, 'showSlots']);
+        Route::post('add-slot', [DoctorAvailabilityController::class, 'addSlot']);
     }
 );
