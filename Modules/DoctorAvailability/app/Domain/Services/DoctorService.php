@@ -22,8 +22,7 @@ class DoctorService
         $doctor_id = $request['doctor_id'];
         try {
             $doctor = $this->doctorRepository->findDoctor($doctor_id);
-            $slots = $this->doctorRepository->findDoctorSlots($doctor->getId());
-            // dd($slots);
+            $slots = $this->doctorRepository->findSlotsByDoctorId($doctor->getId());
             return $this->successResponse(SlotsResource::collection($slots), 'Doctor slots retrieved successfully');
         } catch (\Exception $e) {
             return $this->errorResponse('Error', $e->getMessage());

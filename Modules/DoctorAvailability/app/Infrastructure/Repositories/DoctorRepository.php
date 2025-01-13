@@ -20,7 +20,7 @@ class DoctorRepository implements DoctorRepositoryInterface
         $doctor = Doctor::where('id', $doctor_id)->first();
 
         if (!$doctor) {
-            throw new \Exception("Doctor not found");
+            throw new \InvalidArgumentException("Doctor not found");
         }
 
         return new DoctorEntity($doctor->id, $doctor->name);
@@ -28,23 +28,21 @@ class DoctorRepository implements DoctorRepositoryInterface
     /**
      * @return SlotEntity[]
      */
-    public function findDoctorSlots(string $doctor_id): Collection
+    public function findSlotsByDoctorId(string $doctor_id): Collection
     {
         $slots = Slot::where('doctor_id', $doctor_id)->get();
 
-        if (!$slots) {
-            throw new \Exception("Doctor has not slots");
-        }
-
-        return $slots->map(function ($slot) {
-            return new SlotEntity(
-                $slot->id,
-                $slot->doctor_id,
-                new DateTimeImmutable($slot->time),
-                $slot->is_reserved,
-                $slot->cost
-            );
-        });
+        return $slots->map(
+            function ($slot) {
+                return new SlotEntity(
+                    $slot->id,
+                    $slot->doctor_id,
+                    new DateTimeImmutable($slot->time),
+                    $slot->is_reserved,
+                    $slot->cost
+                );
+            }
+        );
     }
     /**
      * @param SlotEntity $slot

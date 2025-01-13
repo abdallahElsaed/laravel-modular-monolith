@@ -15,7 +15,7 @@ interface DoctorRepositoryInterface
     /**
      * @return SlotEntity[]
      */
-    public function findDoctorSlots(string $doctor_id): Collection;
+    public function findSlotsByDoctorId(string $doctor_id): Collection;
     /**
      * @param SlotEntity $slot
      */
