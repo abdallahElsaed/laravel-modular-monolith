@@ -21,6 +21,7 @@ class ShowAvailableSlotsAction
 
     public function show($request)
     {
+        // dd($request);
             // 1. check if doctor is exist
             $this->doctorIsExistRepository->doctorIsExist($request['doctor_id']);
             // 2. get all available slots for the doctor from repo

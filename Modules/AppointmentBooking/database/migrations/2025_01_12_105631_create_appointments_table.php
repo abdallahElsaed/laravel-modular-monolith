@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('slot_id');
             $table->uuid('patient_id');
+            $table->uuid('doctor_id');
             $table->timestamp('reserved_at');
             $table->string('status')->default('booked'); // Appointment status (booked, completed , cancelled)
             $table->timestamps();

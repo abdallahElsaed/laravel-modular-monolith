@@ -2,11 +2,15 @@
 
 namespace Modules\AppointmentBooking\Providers;
 
+use RecursiveIteratorIterator;
+use RecursiveDirectoryIterator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
+use Modules\AppointmentBooking\Infrastructure\Repositories\PatientRepository;
+use Modules\AppointmentBooking\Infrastructure\Repositories\AppointmentRepository;
+use Modules\AppointmentBooking\Domain\Contracts\PatientIsExistRepositoryInterface;
+use Modules\AppointmentBooking\Domain\Contracts\SaveAppointmentRepositoryInterface;
 
 class AppointmentBookingServiceProvider extends ServiceProvider
 {
@@ -36,6 +40,15 @@ class AppointmentBookingServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+
+        $this->app->bind(
+            SaveAppointmentRepositoryInterface::class,
+            AppointmentRepository::class
+        );
+        $this->app->bind(
+            PatientIsExistRepositoryInterface::class,
+            PatientRepository::class
+        );
     }
 
     /**
