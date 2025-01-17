@@ -25,7 +25,7 @@ class DoctorRepository implements DoctorRepositoryInterface
 
         return new DoctorEntity($doctor->id, $doctor->name);
     }
-       /**
+    /**
      * @param string $doctor_id
      */
     public function doctorIsExist(string $doctor_id): void

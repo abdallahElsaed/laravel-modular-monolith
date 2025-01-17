@@ -2,64 +2,40 @@
 
 namespace Modules\AppointmentBooking\Http\Controllers;
 
+use App\Shared\Traits\ResponseJson;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Modules\AppointmentBooking\Http\Resources\SlotsResource;
+use Modules\AppointmentBooking\Actions\ShowAvailableSlotsAction;
+use Modules\AppointmentBooking\Http\Requests\AvailableSlotsRequest;
 
 class AppointmentBookingController extends Controller
 {
+    use ResponseJson;
+
+    public function __construct(
+        private ShowAvailableSlotsAction $showAvailableSlotsAction
+    ) {
+    }
     /**
-     * Display a listing of the resource.
+     * Display a listing of Available Slots.
      */
-    public function index()
+    public function showAvailableSlots(AvailableSlotsRequest $request)
     {
-        return view('appointmentbooking::index');
+        // dd($request->validated());
+        try {
+            $slots = $this->showAvailableSlotsAction->show($request->validated());
+            // 3. return response with available slots
+            return $this->successResponse(SlotsResource::collection($slots),  'Doctor slots retrieved successfully');
+        } catch (\Exception $e) {
+            return $this->errorResponse($e->getMessage());
+        }
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function bookAppointment()
     {
-        return view('appointmentbooking::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     */
-    public function show($id)
-    {
-        return view('appointmentbooking::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        return view('appointmentbooking::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
-    {
-        //
+        return  'bookAppointment';
     }
 }

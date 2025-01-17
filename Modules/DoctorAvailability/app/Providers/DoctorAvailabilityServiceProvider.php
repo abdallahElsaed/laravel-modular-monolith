@@ -9,6 +9,10 @@ use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 use Modules\DoctorAvailability\Domain\Contracts\DoctorRepositoryInterface;
 use Modules\DoctorAvailability\Infrastructure\Repositories\DoctorRepository;
+use Modules\DoctorAvailability\Domain\Contracts\DoctorIsExistRepositoryInterface;
+use Modules\DoctorAvailability\Domain\Contracts\AvailableSlotsRepositoryInterface;
+use Modules\DoctorAvailability\Infrastructure\Repositories\DoctorIsExistRepository;
+use Modules\DoctorAvailability\Infrastructure\Repositories\AvailableSlotsRepository;
 
 class DoctorAvailabilityServiceProvider extends ServiceProvider
 {
@@ -39,10 +43,17 @@ class DoctorAvailabilityServiceProvider extends ServiceProvider
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
 
-        // bind the DoctorRepositoryInterface to the DoctorRepository
         $this->app->bind(
             DoctorRepositoryInterface::class,
             DoctorRepository::class
+        );
+        $this->app->bind(
+            AvailableSlotsRepositoryInterface::class,
+            AvailableSlotsRepository::class
+        );
+        $this->app->bind(
+            DoctorIsExistRepositoryInterface::class,
+            DoctorIsExistRepository::class
         );
     }
 

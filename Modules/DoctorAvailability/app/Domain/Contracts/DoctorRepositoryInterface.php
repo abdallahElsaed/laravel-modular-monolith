@@ -9,14 +9,15 @@ use Modules\DoctorAvailability\Domain\Entities\DoctorEntity;
 interface DoctorRepositoryInterface
 {
     /**
-     * @param SlotEntity $slot
+     * @param string $doctor_id
      */
     public function findDoctor(string $doctor_id): DoctorEntity ;
     /**
-     * @param SlotEntity $slot
+     * @param string $doctor_id
      */
     public function doctorIsExist(string $doctor_id): void ;
     /**
+     * @param string $doctor_id
      * @return SlotEntity[]
      */
     public function findSlotsByDoctorId(string $doctor_id): Collection;
