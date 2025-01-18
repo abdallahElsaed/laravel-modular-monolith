@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\DoctorAppointmentManagement\Http\Controllers\DoctorAppointmentManagementController;
+use Modules\DoctorAppointmentManagement\Shell\Http\Controllers\DoctorAppointmentManagementController;
 
 /*
  *--------------------------------------------------------------------------
@@ -14,6 +14,11 @@ use Modules\DoctorAppointmentManagement\Http\Controllers\DoctorAppointmentManage
  *
 */
 
-// Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-//     Route::apiResource('doctorappointmentmanagement', DoctorAppointmentManagementController::class)->names('doctorappointmentmanagement');
-// });
+Route::group(
+    [
+        'prefix' => 'doctor-appointment-management',
+    ], function () {
+        Route::get('show-upcoming-appointment', [DoctorAppointmentManagementController::class, 'showUpcomingAppointment']);
+        Route::post('approve-appointment', [DoctorAppointmentManagementController::class, 'approveAppointment']);
+    }
+);

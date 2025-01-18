@@ -11,6 +11,8 @@ use Modules\AppointmentBooking\Infrastructure\Repositories\PatientRepository;
 use Modules\AppointmentBooking\Infrastructure\Repositories\AppointmentRepository;
 use Modules\AppointmentBooking\Domain\Contracts\PatientIsExistRepositoryInterface;
 use Modules\AppointmentBooking\Domain\Contracts\SaveAppointmentRepositoryInterface;
+use Modules\AppointmentBooking\Domain\Contracts\ApproveAppointmentRepositoryInterface;
+use Modules\AppointmentBooking\Domain\Contracts\GetUpcomingAppointmentRepositoryInterface;
 
 class AppointmentBookingServiceProvider extends ServiceProvider
 {
@@ -48,6 +50,14 @@ class AppointmentBookingServiceProvider extends ServiceProvider
         $this->app->bind(
             PatientIsExistRepositoryInterface::class,
             PatientRepository::class
+        );
+        $this->app->bind(
+            GetUpcomingAppointmentRepositoryInterface::class,
+            AppointmentRepository::class
+        );
+        $this->app->bind(
+            ApproveAppointmentRepositoryInterface::class,
+            AppointmentRepository::class
         );
     }
 
