@@ -112,7 +112,7 @@ Your application should adhere to the following business requirements:
     
 **
 
-4. Doctor Appointment Management: Hexagonal Architecture
+4. **Doctor Appointment Management** : Hexagonal Architecture
 
 **
 

@@ -25,7 +25,6 @@ class DoctorAppointmentManagementController extends Controller
             $appointment = $this->doctorManagementService->showUpcomingAppointment($request->validated());
             // dd($appointment);
             return $this->successResponse(AppointmentResource::collection($appointment),  'Upcoming Appointment retrieved successfully');
-
         } catch (\Exception $e) {
             return response()->json(
                 [

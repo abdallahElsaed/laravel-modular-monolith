@@ -7,6 +7,7 @@ use RecursiveDirectoryIterator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
+use Modules\AppointmentBooking\Domain\Contracts\PatientRepositoryInterface;
 use Modules\AppointmentBooking\Infrastructure\Repositories\PatientRepository;
 use Modules\AppointmentBooking\Infrastructure\Repositories\AppointmentRepository;
 use Modules\AppointmentBooking\Domain\Contracts\PatientIsExistRepositoryInterface;
@@ -49,6 +50,10 @@ class AppointmentBookingServiceProvider extends ServiceProvider
         );
         $this->app->bind(
             PatientIsExistRepositoryInterface::class,
+            PatientRepository::class
+        );
+        $this->app->bind(
+            PatientRepositoryInterface::class,
             PatientRepository::class
         );
         $this->app->bind(

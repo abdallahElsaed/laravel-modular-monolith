@@ -6,11 +6,9 @@ use DateTimeImmutable;
 use Illuminate\Support\Collection;
 use Modules\DoctorAvailability\Models\Slot;
 use Modules\DoctorAvailability\Domain\Entities\SlotEntity;
-use Modules\DoctorAvailability\Domain\Contracts\GetSlotRepositoryInterface;
-use Modules\DoctorAvailability\Domain\Contracts\ReserveSlotRepositoryInterface;
-use Modules\DoctorAvailability\Domain\Contracts\AvailableSlotsRepositoryInterface;
+use Modules\DoctorAvailability\Domain\Contracts\SlotRepositoryInterface;
 
-class SlotsRepository implements AvailableSlotsRepositoryInterface, ReserveSlotRepositoryInterface, GetSlotRepositoryInterface
+class SlotsRepository implements SlotRepositoryInterface
 {
     public function getAvailableSlots(string $doctor_id): Collection
     {
@@ -50,6 +48,53 @@ class SlotsRepository implements AvailableSlotsRepositoryInterface, ReserveSlotR
             new DateTimeImmutable($slot->time),
             $slot->is_reserved,
             $slot->cost
+        );
+    }
+    /**
+     * @param string $doctor_id
+     * @return SlotEntity[] | Collection
+     */
+    public function findSlotsByDoctorId(string $doctor_id): Collection
+    {
+        $slots = Slot::where('doctor_id', $doctor_id)->get();
+
+        return $slots->map(
+            function ($slot) {
+                return new SlotEntity(
+                    $slot->id,
+                    $slot->doctor_id,
+                    new DateTimeImmutable($slot->time),
+                    $slot->is_reserved,
+                    $slot->cost
+                );
+            }
+        );
+    }
+        /**
+     * @param SlotEntity $slot
+     */
+    public function addSlot(SlotEntity $slot):  SlotEntity
+    {
+        $slot = Slot::create(
+            [
+            'id' => $slot->getId(),
+            'doctor_id' => $slot->getDoctorId(),
+            'time' => $slot->getTime(),
+            'is_reserved' => $slot->isReserved(),
+            'cost' => $slot->getCost()
+            ]
+        );
+
+        // dd($slot);
+
+        return SlotEntity::create(
+            [
+            'id' => $slot->id,
+            'doctor_id' => $slot->doctor_id,
+            'time' => $slot->time,
+            'is_reserved' => $slot->is_reserved,
+            'cost' => $slot->cost
+            ]
         );
     }
 }

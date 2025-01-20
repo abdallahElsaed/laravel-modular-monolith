@@ -10,7 +10,7 @@ interface SaveAppointmentRepositoryInterface
 {
     /**
      * @param AppointmentEntity $appointment
-     * @return void
+     * @return AppointmentEntity
      */
-    public function saveAppointment(AppointmentEntity $appointment): void;
+    public function saveAppointment(AppointmentEntity $appointment): AppointmentEntity;
 }

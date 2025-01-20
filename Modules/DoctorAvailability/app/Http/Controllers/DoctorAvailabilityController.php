@@ -3,13 +3,17 @@
 namespace Modules\DoctorAvailability\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Shared\Traits\ResponseJson;
 use App\Http\Controllers\Controller;
+use Modules\DoctorAvailability\Http\Resources\SlotsResource;
 use Modules\DoctorAvailability\App\Domain\Services\DoctorService;
 use Modules\DoctorAvailability\Http\Requests\AddDoctorSlotsRequest;
 use Modules\DoctorAvailability\Http\Requests\ShowDoctorSlotsRequest;
 
 class DoctorAvailabilityController extends Controller
 {
+    use ResponseJson;
+
     /**
      * @var DoctorService
      */
@@ -24,11 +28,20 @@ class DoctorAvailabilityController extends Controller
      */
     public function showSlots(ShowDoctorSlotsRequest $request)
     {
-        // dd($request->validated());
-        return $this->doctorService->showSlots($request->validated());
+        try {
+            $slots = $this->doctorService->showSlots($request->validated());
+            return $this->successResponse(SlotsResource::collection($slots), 'Doctor slots retrieved successfully');
+        } catch (\Exception $e) {
+            return $this->errorResponse('Error', $e->getMessage());
+        }
     }
     public function addSlot(AddDoctorSlotsRequest $request)
     {
-        return $this->doctorService->addSlot($request->validated());
+        try {
+            $slot = $this->doctorService->addSlot($request->validated());
+            return $this->successResponse(new SlotsResource($slot), 'Slot added successfully');
+        } catch (\Exception $e) {
+            return $this->errorResponse('Error', $e->getMessage());
+        }
     }
 }

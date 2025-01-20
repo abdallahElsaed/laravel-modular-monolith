@@ -7,15 +7,10 @@ use RecursiveDirectoryIterator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
+use Modules\DoctorAvailability\Domain\Contracts\SlotRepositoryInterface;
 use Modules\DoctorAvailability\Domain\Contracts\DoctorRepositoryInterface;
-use Modules\DoctorAvailability\Domain\Contracts\GetSlotRepositoryInterface;
 use Modules\DoctorAvailability\Infrastructure\Repositories\SlotsRepository;
 use Modules\DoctorAvailability\Infrastructure\Repositories\DoctorRepository;
-use Modules\DoctorAvailability\Domain\Contracts\ReserveSlotRepositoryInterface;
-use Modules\DoctorAvailability\Domain\Contracts\DoctorIsExistRepositoryInterface;
-use Modules\DoctorAvailability\Domain\Contracts\AvailableSlotsRepositoryInterface;
-use Modules\DoctorAvailability\Infrastructure\Repositories\DoctorIsExistRepository;
-use Modules\DoctorAvailability\Infrastructure\Repositories\AvailableSlotsRepository;
 
 class DoctorAvailabilityServiceProvider extends ServiceProvider
 {
@@ -51,19 +46,7 @@ class DoctorAvailabilityServiceProvider extends ServiceProvider
             DoctorRepository::class
         );
         $this->app->bind(
-            AvailableSlotsRepositoryInterface::class,
-            SlotsRepository::class
-        );
-        $this->app->bind(
-            DoctorIsExistRepositoryInterface::class,
-            DoctorIsExistRepository::class
-        );
-        $this->app->bind(
-            ReserveSlotRepositoryInterface::class,
-            SlotsRepository::class
-        );
-        $this->app->bind(
-            GetSlotRepositoryInterface::class,
+            SlotRepositoryInterface::class,
             SlotsRepository::class
         );
     }

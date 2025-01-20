@@ -3,30 +3,30 @@
 namespace Modules\AppointmentBooking\Actions;
 
 use App\Shared\Traits\ResponseJson;
-use Modules\AppointmentBooking\Http\Resources\SlotsResource;
-use Modules\DoctorAvailability\Domain\Contracts\DoctorIsExistRepositoryInterface;
+use Modules\DoctorAvailability\Domain\Contracts\SlotRepositoryInterface;
+use Modules\DoctorAvailability\Domain\Contracts\DoctorRepositoryInterface;
 use Modules\DoctorAvailability\Domain\Contracts\AvailableSlotsRepositoryInterface;
 
 class ShowAvailableSlotsAction
 {
     use ResponseJson;
-    private $availableSlotsRepository;
-    private $doctorIsExistRepository;
+    private $slotsRepository;
+    private $doctorRepository;
 
-    public function __construct(AvailableSlotsRepositoryInterface $availableSlotsRepository, DoctorIsExistRepositoryInterface $doctorIsExistRepository)
+    public function __construct(SlotRepositoryInterface $slotsRepository, DoctorRepositoryInterface $doctorRepository)
     {
-        $this->availableSlotsRepository = $availableSlotsRepository;
-        $this->doctorIsExistRepository = $doctorIsExistRepository;
+        $this->slotsRepository = $slotsRepository;
+        $this->doctorRepository = $doctorRepository;
     }
 
     public function show($request)
     {
-        // dd($request);
-            // 1. check if doctor is exist
-            $this->doctorIsExistRepository->doctorIsExist($request['doctor_id']);
-            // 2. get all available slots for the doctor from repo
-            $slots = $this->availableSlotsRepository->getAvailableSlots($request['doctor_id']);
-            // 3. return response with available slots
-            return $slots;
+        // 1. check if doctor is exist
+        $doctorIsExist = $this->doctorRepository->doctorIsExist($request['doctor_id']);
+        if (!$doctorIsExist) {
+            throw new \InvalidArgumentException("Doctor not found");
+        }
+        // 2. get all available slots for the doctor from repo
+        return $this->slotsRepository->getAvailableSlots($request['doctor_id']);
     }
 }

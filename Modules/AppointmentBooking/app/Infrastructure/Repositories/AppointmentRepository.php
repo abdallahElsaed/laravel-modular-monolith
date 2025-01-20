@@ -16,10 +16,10 @@ class AppointmentRepository implements SaveAppointmentRepositoryInterface, GetUp
      * @param  AppointmentEntity $appointment
      * @return void
      */
-    public function saveAppointment(AppointmentEntity $appointment): void
+    public function saveAppointment(AppointmentEntity $appointment): AppointmentEntity
     {
 
-        Appointment::create(
+        $appointment = Appointment::create(
             [
             'id' => $appointment->getId(),
             'slot_id' => $appointment->getSlotId(),
@@ -27,6 +27,16 @@ class AppointmentRepository implements SaveAppointmentRepositoryInterface, GetUp
             'doctor_id' => $appointment->getDoctorId(),
             'reserved_at' => $appointment->getReservedAt(),
             'status' => $appointment->getStatus()
+            ]
+        );
+        return AppointmentEntity::create(
+            [
+            'id' => $appointment->id,
+            'slot_id' => $appointment->slot_id,
+            'patient_id' => $appointment->patient_id,
+            'doctor_id' => $appointment->doctor_id,
+            'reserved_at' => $appointment->reserved_at,
+            'status' => $appointment->doctor_id
             ]
         );
     }

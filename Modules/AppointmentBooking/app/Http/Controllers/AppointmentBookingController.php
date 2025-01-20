@@ -24,7 +24,6 @@ class AppointmentBookingController extends Controller
      */
     public function showAvailableSlots(AvailableSlotsRequest $request)
     {
-        // dd($request->validated());
         try {
             $slots = $this->showAvailableSlotsAction->show($request->validated());
             // 3. return response with available slots

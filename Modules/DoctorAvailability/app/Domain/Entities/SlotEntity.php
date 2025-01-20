@@ -27,6 +27,17 @@ class SlotEntity
         $this->cost = $cost;
     }
 
+    public static function create(array $data)
+    {
+        return new self(
+            $data['id'],
+            $data['doctor_id'],
+            $data['time'],
+            $data['is_reserved'],
+            $data['cost']
+        );
+    }
+
     public function getId()
     {
         return $this->id;
